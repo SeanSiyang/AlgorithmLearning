@@ -35,15 +35,41 @@ int fib(int n)
     return res;
 }
 
+/* 斐波那契数列：尾递归 */
+// 下面的实现有问题：尾递归形式应该是递归调用的结果直接返回，而不经过其他计算
+// 应该把计算放在函数的参数里，而不是让两个函数的返回值进行计算
+int tailFib(int n, int res)
+{
+    if (n == 1 || n == 2)
+        return n - 1;
+    return tailFib(n - 1, res) + tailFib(n - 2, res);
+}
+
+int tailFibII(int n, int a = 0, int b = 1)
+{
+    if (n == 0)
+        return a;
+    else if (n == 1)
+        return b;
+    else
+        return tailFibII(n - 1, b, a + b);
+}
+
 int main()
 {
-    int n = 5;
-    int res = recur(5);
-    int resTail = 0;
-    resTail = tailRecur(5, resTail);
+    // int n = 5;
+    // int res = recur(5);
+    // int resTail = 0;
+    // resTail = tailRecur(5, resTail);
+
+    // printf("res = %d\n", res);
+    // printf("resTail = %d", resTail);
+
+    int n = 3;
+    int res = 0;
+    res = tailFib(n, res);
 
     printf("res = %d\n", res);
-    printf("resTail = %d", resTail);
 
     return 0;
 }
