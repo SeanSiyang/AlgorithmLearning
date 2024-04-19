@@ -312,3 +312,108 @@ def fib(n: int) -> int:
 
 2. 归：当函数完成执行并返回时，对应的栈帧会被从“调用栈”上移除，恢复之前函数的执行环境。
 
+# 时间复杂度
+
+## 统计时间增长趋势
+
+时间复杂度分析统计的不是算法运行时间，而是算法运行时间随着数据量变大时的增长趋势。
+
+推算方法：忽略常数项，省略所有系数，循环嵌套使用乘法，保留最高项
+
+例：
+
+$10000$ --> $O(1)$
+
+$3n + 2$ --> $O(n)$
+
+$2n^2 + 3n + 2$ --> $O(n^2)$
+
+$n^3 + 10000n^2$ --> $O(n^3)$
+
+$2^n + 10000n^2$ --> $2^n$
+
+设输入数据大小为$n$，常见的时间复杂度类型（按从低到高的顺序排序）：
+$$ O(1) < O(\log n) < O(n) < O(n\log n) < O(n^2) < O(2^n) < O(n!)$$
+
+## 常数阶 $O(1)$
+
+常数阶的操作数量与输入数据大小$n$无关，即不随着$n$的变化而变化。
+
+```c++
+#include <iostream>
+
+int constant(int n)
+{
+    int count = 0;
+    int size = 100000;
+    for (int i = 0; i < size; i++)
+    {
+        count++;
+    }
+
+    return count;
+}
+
+int main()
+{
+    int count = constant(10);
+    std::cout << count << std::endl;
+}
+```
+
+```python
+def constant(n: int) -> int:
+    """常数阶"""
+    count = 0
+    size = 100000
+    for _ in range(size):
+        count += 1
+
+    return count
+
+"""Driver Code"""
+if __name__ == "__main__":
+    n = 8
+    print("输入数据大小 n = ", n)
+
+    count = constant(n)
+    print("常数阶的操作数量 = ", count)
+```
+
+### 线性阶 $O(n)$
+
+线性阶的操作数量相对于输入数据大小$n$以线性级别增长
+
+线性阶通常出现在单层循环中，
+
+```c++
+/* 线性阶 */
+int linear(int n)
+{
+    int count = 0;
+    for (int i = 0; i < n; i++)
+    {
+        count++;
+    }
+    return count;
+}
+```
+
+遍历数组和遍历链表等操作的时间复杂度均为$O(n)$，其中$n$为数组或链表的长度：
+
+```c++
+/* 线性阶（遍历数组） */
+int arrayTraversal(std::vector<int> &nums)
+{
+    int count = 0;
+    for (int num : nums)
+    {
+        count++;
+    }
+    return count;
+}
+```
+
+值得注意的是，输入数据大小$n$需根据**输入数据的类型**来具体确定。
+
+比如在第一个示例中，变量 $n$ 为输入数据大小；在第二个示例中，数组长度 $n$ 为数据大小。

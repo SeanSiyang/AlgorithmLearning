@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 
 /* 递归：在归的过程中进行计算 */
 int recur(int n)
@@ -55,6 +56,29 @@ int tailFibII(int n, int a = 0, int b = 1)
         return tailFibII(n - 1, b, a + b);
 }
 
+/* 使用迭代模拟递归 */
+int forLoopRecur(int n)
+{
+    // 显示栈模拟系统调用栈
+    std::stack<int> stack;
+    int res = 0;
+    // 递：递归调用
+    for (int i = n; i > 0; i--)
+    {
+        stack.push(i);
+    }
+
+    // 归：返回结果
+    while (!stack.empty())
+    {
+        res += stack.top();
+        std::cout << "stack top(): " << stack.top() << std::endl;
+        stack.pop();
+    }
+
+    return res;
+}
+
 int main()
 {
     // int n = 5;
@@ -65,9 +89,9 @@ int main()
     // printf("res = %d\n", res);
     // printf("resTail = %d", resTail);
 
-    int n = 3;
+    int n = 5;
     int res = 0;
-    res = tailFib(n, res);
+    res = forLoopRecur(n);
 
     printf("res = %d\n", res);
 
