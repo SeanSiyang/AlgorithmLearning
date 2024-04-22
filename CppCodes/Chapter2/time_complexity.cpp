@@ -107,6 +107,14 @@ int logarighmic(int n)
     return count;
 }
 
+/*  对数阶（递归实现）*/
+int logRecur(int n)
+{
+    if (n <= 1)
+        return 0;
+    return logRecur(n / 2) + 1;
+}
+
 int main()
 {
     int count = exponential(8);

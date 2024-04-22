@@ -61,6 +61,21 @@ def logarithmic(n: int) -> int:
     
     return count
 
+def log_recur(n: int) -> int:
+    """对数阶（递归实现）"""
+    if n <= 1:
+        return 0
+    return log_recur(n / 2) + 1
+
+def linear_log_recur(n: int) -> int:
+    """线性对数阶"""
+    if n <= 1:
+        return 1
+    count: int = linear_log_recur(n // 2) + linear_log_recur(n // 2)
+    for _ in range(n):
+        count += 1
+    return count
+
 """Driver Code"""
 if __name__ == "__main__":
     n = 3
